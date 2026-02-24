@@ -37,34 +37,37 @@ class Akun extends StatelessWidget {
           height: 50.0,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: NetworkImage(
-                'https://avatars0.githubusercontent.com/u/11346949?s=460&v=4'
-              )
-            )
+            color: Colors.white,
           ),
+          child: const FlutterLogo(),
         ),
-        title: Text('Puji Kartono', style: TextStyle(fontWeight: FontWeight.bold),),
-        subtitle: Row(
-          children: <Widget>[
-            RaisedButton.icon(
-              icon: Icon(Icons.album),
-              label: Text('99 Point'),
-              onPressed: (){},
-              color: Colors.grey[200],
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-            ),
-            Padding(padding: EdgeInsets.all(8.0),),
-            RaisedButton(
-              child: Text('Traveloka Pay'),
-              onPressed: (){},
-              color: Colors.grey[200],
-              elevation: 0.0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-            )
-          ],
+        title: Text('rekysda', style: TextStyle(fontWeight: FontWeight.bold),),
+        subtitle: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: <Widget>[
+              ElevatedButton.icon(
+                icon: Icon(Icons.album),
+                label: Text('99 Point'),
+                onPressed: (){},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[200],
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                ),
+              ),
+              Padding(padding: EdgeInsets.all(8.0),),
+              ElevatedButton(
+                child: Text('Traveloka Pay'),
+                onPressed: (){},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[200],
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -76,8 +79,10 @@ class MenuUtama extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       shrinkWrap: true,
-        crossAxisCount: 5,
-        children: menuUtamaItem,
+      physics: NeverScrollableScrollPhysics(),
+      crossAxisCount: 5,
+      childAspectRatio: 0.55,
+      children: menuUtamaItem,
     );
   }
 }
@@ -86,7 +91,7 @@ List<MenuUtamaItem> menuUtamaItem = [
   MenuUtamaItem(
     title: 'Tiket Pesawat',
     icon: Icons.flight,
-    colorBox: Colors.blue[900],
+    colorBox: Colors.blue[900]!,
     iconColor: Colors.white,
   ),
   MenuUtamaItem(
@@ -98,7 +103,7 @@ List<MenuUtamaItem> menuUtamaItem = [
   MenuUtamaItem(
     title: 'Aktifitas & Rekreasi',
     icon: Icons.local_play,
-    colorBox: Colors.green[300],
+    colorBox: Colors.green[300]!,
     iconColor: Colors.white,
   ),
   MenuUtamaItem(
@@ -116,13 +121,13 @@ List<MenuUtamaItem> menuUtamaItem = [
   MenuUtamaItem(
     title: 'Transportasi Bandara',
     icon: Icons.local_taxi,
-    colorBox: Colors.blue[300],
+    colorBox: Colors.blue[300]!,
     iconColor: Colors.white,
   ),
   MenuUtamaItem(
     title: 'Rental Mobil',
     icon: Icons.directions_car,
-    colorBox: Colors.green[900],
+    colorBox: Colors.green[900]!,
     iconColor: Colors.white,
   ),
   MenuUtamaItem(
@@ -134,7 +139,7 @@ List<MenuUtamaItem> menuUtamaItem = [
 ];
 
 class MenuUtamaItem extends StatelessWidget {
-  MenuUtamaItem({this.title, this.icon, this.colorBox, this.iconColor});
+  MenuUtamaItem({required this.title, required this.icon, required this.colorBox, required this.iconColor});
   final String title;
   final IconData icon;
   final Color colorBox, iconColor;
@@ -142,21 +147,26 @@ class MenuUtamaItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){},
-          child: Column(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-          height: 50.0,
-          width: 50.0,
-          decoration: BoxDecoration(
-            color: colorBox,
-            shape: BoxShape.circle
+            height: 50.0,
+            width: 50.0,
+            decoration: BoxDecoration(
+              color: colorBox,
+              shape: BoxShape.circle
+            ),
+            child: Icon(icon, color:iconColor),
           ),
-          child: Icon(icon, color:iconColor),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 3.0),
-          child: Text(title, style: TextStyle(fontSize: 12.0), textAlign: TextAlign.center,),
-        )
+          Padding(
+            padding: const EdgeInsets.only(top: 5.0, left: 2.0, right: 2.0),
+            child: Text(
+              title, 
+              style: TextStyle(fontSize: 10.5), 
+              textAlign: TextAlign.center,
+            ),
+          )
         ]
       ),
     );
@@ -167,8 +177,8 @@ class MenuTambahan extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.0,
-      padding: EdgeInsets.symmetric(vertical: 20.0),
+      height: 120.0,
+      padding: EdgeInsets.symmetric(vertical: 10.0),
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: menuTambahan,
@@ -187,7 +197,7 @@ List<MenuTambahanItem> menuTambahan = [
 ];
 
 class MenuTambahanItem extends StatelessWidget {
-  MenuTambahanItem({this.title, this.icon});
+  MenuTambahanItem({required this.title, required this.icon});
   final String title;
   final IconData icon;
   @override
@@ -195,11 +205,15 @@ class MenuTambahanItem extends StatelessWidget {
     return Container(
       width: 100.0,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Icon(icon),
+          SizedBox(height: 5.0),
           Text(
             title,
             textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 11.5),
           )
         ],
       ),
@@ -236,7 +250,7 @@ class Promo extends StatelessWidget {
               end: Alignment.bottomCenter,
               colors: [
                 Colors.blue,
-                Colors.blue[800]
+                Colors.blue[800]!
               ]
             ),
             borderRadius: BorderRadius.circular(8.0)

@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -80,23 +80,23 @@ void _onTabItem(int index) {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon:Icon(Icons.home),
-            title: Text('Awal')
+            label: 'Awal'
           ),
           BottomNavigationBarItem(
             icon:Icon(Icons.save),
-            title: Text('Simpan')
+            label: 'Simpan'
           ),
           BottomNavigationBarItem(
             icon:Icon(Icons.view_agenda),
-            title: Text('Pesanan')
+            label: 'Pesanan'
           ),
           BottomNavigationBarItem(
             icon:Icon(Icons.inbox),
-            title: Text('Inbox')
+            label: 'Inbox'
           ),
           BottomNavigationBarItem(
             icon:Icon(Icons.account_circle),
-            title: Text('Akun Saya')
+            label: 'Akun Saya'
           ),
         ],
         type: BottomNavigationBarType.fixed,
